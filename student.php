@@ -86,7 +86,7 @@ if (!empty($_POST)) {
 	);
 
 	// Si tout est ok
-	if (!$conf->haveError()) {
+	if ($conf->haveError() === false) {
 		if ($studentObject->saveDB()) {
 			header('Location: student.php?success='.urlencode('Ajout/Modification effectuée').'&stu_id='.$studentObject->getId());
 			exit;
