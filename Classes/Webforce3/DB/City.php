@@ -47,14 +47,6 @@ class City extends DbObject {
 	}
 
 	/**
-	 * @param int $cityId
-	 * @return DbObject[]
-	 */
-	public static function getFromCity($cityId) {
-		// TODO: Implement getFromCity() method.
-	}
-
-	/**
 	 * @return bool
 	 */
 	public function saveDB() {
