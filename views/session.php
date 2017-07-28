@@ -47,7 +47,7 @@
 			<div class="row">
 				<div class="col-md-6 col-sm-6 col-xs-12">
 					<div class="form-group">
-						<label for="ses_start_date">Numéro de session</label>
+						<label for="ses_number">Numéro de session</label>
 						<input type="text" class="form-control" name="ses_number" id="ses_number" placeholder="Numéro" value="<?= $sessionObject->getNumber() ?>">
 					</div>
 				</div>

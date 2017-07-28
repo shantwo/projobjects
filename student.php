@@ -86,7 +86,7 @@ if (!empty($_POST)) {
 	);
 
 	// Si tout est ok
-	if (!$conf->haveError()) {
+	if ($conf->haveError() === false) {
 		if ($studentObject->saveDB()) {
 			header('Location: student.php?success='.urlencode('Ajout/Modification effectuée').'&stu_id='.$studentObject->getId());
 			exit;
@@ -124,6 +124,7 @@ $selectCities = new SelectHelper($citiesList, $studentObject->getCity()->getId()
 	'id' => 'cit_id',
 	'class' => 'form-control',
 ));
+
 
 // Views - toutes les variables seront automatiquement disponibles dans les vues
 require $conf->getViewsDir().'header.php';
