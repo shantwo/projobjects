@@ -3,6 +3,7 @@
 namespace Classes\Webforce3\DB;
 
 use Classes\Webforce3\Config\Config;
+use Classes\Webforce3\Exceptions\InvalidSqlQueryException;
 
 class City extends DbObject {
 
@@ -49,7 +50,8 @@ class City extends DbObject {
 
     /**
      * @param int $id
-     * @return DbObject
+     * @return bool|City
+     * @throws InvalidSqlQueryException
      */
     public static function get($id) {
         $sql = '
@@ -127,6 +129,7 @@ class City extends DbObject {
 
             if ($stmt->execute() === false) {
                 throw new InvalidSqlQueryException($sql, $stmt);
+                return false;
             }
             else {
                 return true;
@@ -143,6 +146,7 @@ class City extends DbObject {
 
             if ($stmt->execute() === false) {
                 throw new InvalidSqlQueryException($sql, $stmt);
+                return false;
             }
             else {
                 $this->id = Config::getInstance()->getPDO()->lastInsertId();
@@ -150,7 +154,7 @@ class City extends DbObject {
             }
         }
 
-        return false;
+
     }
 
     /**
