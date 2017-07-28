@@ -45,7 +45,6 @@ if ($sessionId > 0) {
 
 // Formulaire soumis
 if(!empty($_POST)) {
-    print_r($_POST);
     $sessionId = isset($_POST['id']) ? intval($_POST['id']) : 0;
     $sessionStartDate = isset($_POST['ses_start_date']) ? $_POST['ses_start_date'] : '';
     $sessionEndDate = isset($_POST['ses_end_date']) ? $_POST['ses_end_date'] : '';

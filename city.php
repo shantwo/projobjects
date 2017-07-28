@@ -53,14 +53,14 @@ if(!empty($_POST)) {
     else if (!array_key_exists($countryId, $countriesList)) {
 		$conf->addError('Pays non valide');
 	}
-    
+
     // je remplis l'objet qui est lu pour les inputs du formulaire, ou pour l'ajout en DB
 	$cityObject = new City(
 		$cityId,
-        new Country($countryId),
-		$cityName
-	);
-    
+        $cityName,
+        new Country($countryId)
+    );
+
     // Si tout est ok
 	if ($conf->haveError() === false) {
 		if ($cityObject->saveDB()) {

@@ -3,8 +3,35 @@
 namespace Classes\Webforce3\DB;
 
 use Classes\Webforce3\Config\Config;
+use Classes\Webforce3\Exceptions\InvalidSqlQueryException;
 
 class City extends DbObject {
+
+    protected $name;
+
+    protected $iso;
+
+    protected $country;
+
+    /**
+     * City constructor.
+     * @param $name
+     * @param $iso
+     */
+    public function __construct($id=0, $name='', $country=null ,$inserted=0 )
+    {
+        parent::__construct($id, $inserted);
+
+        $this->name = $name;
+        if (empty($country)) {
+            $this->country = new Country();
+        }
+        else {
+            $this->country = $country;
+        }
+    }
+
+
     /**
      * @param int $id
      * @return DbObject
@@ -22,8 +49,9 @@ class City extends DbObject {
             if (!empty($row)) {
                 $currentObject = new City(
                     $row['cit_id'],
-                    //new Country($row['country_cou_id']),
-                    Country::get($row['country_cou_id']), $row['cit_name'], $row['cit_inserted']);
+                    $row['cit_name'],
+                    new Country($row['country_cou_id']),
+                    $row['cit_inserted']);
                 return $currentObject;
             }
         }
@@ -69,7 +97,51 @@ class City extends DbObject {
 	 * @return bool
 	 */
 	public static function deleteById($id) {
-		// TODO: Implement deleteById() method.
+        $sql = '
+				DELETE FROM city 
+				WHERE cit_id = :id
+			';
+        $stmt = Config::getInstance()->getPDO()->prepare($sql);
+        $stmt->bindValue(':id', $id, \PDO::PARAM_INT);
+
+        if ($stmt->execute() === false) {
+            print_r($stmt->errorInfo());
+        }
+        else {
+            return true;
+        }
+        return false;
 	}
+
+    public static function getAll()
+    {
+        // TODO: Implement getAll() method.
+    }
+
+    /**
+     * @return null
+     */
+    public function getCountry()
+    {
+        return $this->country;
+    }
+
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+
 
 }

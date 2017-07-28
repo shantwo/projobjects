@@ -126,4 +126,13 @@ class Country extends DbObject {
     public function getName() {
         return $this->name;
     }
+
+    /**
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
 }

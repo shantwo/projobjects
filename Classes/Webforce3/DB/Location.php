@@ -66,10 +66,11 @@ class Location extends DbObject
         } else {
             $row = $stmt->fetch(\PDO::FETCH_ASSOC);
             if (!empty($row)) {
-                $currentObject = new City(
+                $currentObject = new Location(
                     $row['loc_id'],
-                    //new Country($row['country_cou_id']),
-                    Country::get($row['loc_name']), $row['loc_inserted'], $row['country_cou_id']);
+                    new Country($row['country_cou_id']),
+                    $row['loc_name'],
+                    $row['loc_inserted']);
                 return $currentObject;
             }
         }

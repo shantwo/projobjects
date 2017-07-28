@@ -11,9 +11,13 @@ use Classes\Webforce3\DB\Country;
 
 // Get the config object
 $conf = Config::getInstance();
-$locationId = isset($_GET['loc_id']) ? intval($_GET['loc_id']) : 0;
+$locationId = isset($_GET['loc_name']) ? intval($_GET['loc_name']) : 0;
 
-$locationObject = new Location();
+if ($locationId > 0) {
+    $locationObject = Location::get($locationId);
+    $countryObject = $locationObject->getCountry();
+}
+
 
 // Récupère la liste complète des cities en DB
 $locationList = Location::getAllForSelect();
@@ -35,7 +39,11 @@ $selectCountries = new SelectHelper($countriesList, $locationObject->getCountry(
     'class' => 'form-control',
 ));
 
-
+// Formulaire soumis
+if(!empty($_POST)) {
+    print_r($_POST);
+    $locationObject = new Location($_POST['loc_name']);
+}
 // Views - toutes les variables seront automatiquement disponibles dans les vues
 require $conf->getViewsDir().'header.php';
 require $conf->getViewsDir().'location.php';

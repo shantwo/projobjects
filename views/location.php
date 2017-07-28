@@ -43,7 +43,7 @@
                     <input type="submit" class="btn btn-success btn-block" value="Valider" />
                 </div>
                 <div class="col-md-3 col-sm-3 col-xs-12">
-                    <a href="?delete=<?= $cityObject->getId() ?>" class="btn btn-warning btn-block<?php if ($cityObject->getId() <= 0) : ?> disabled<?php endif; ?>" role="button" aria-disabled="true">Supprimer</a>
+                    <a href="?delete=<?= $locationObject->getId() ?>" class="btn btn-warning btn-block<?php if ($locationObject->getId() <= 0) : ?> disabled<?php endif; ?>" role="button" aria-disabled="true">Supprimer</a>
                 </div>
             </div>
         </form>
