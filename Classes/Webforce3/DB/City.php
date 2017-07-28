@@ -5,20 +5,31 @@ namespace Classes\Webforce3\DB;
 use Classes\Webforce3\Config\Config;
 
 class City extends DbObject {
-	/**
-	 * @param int $id
-	 * @return DbObject
+    /**
+     * @param int $id
+     * @return DbObject
 	 */
-	public static function get($id) {
-		// TODO: Implement get() method.
-	}
+    public static function get($id) {
+        $sql = 'SELECT cit_id, cit_name, cit_inserted, country_cou_id
+        FROM city
+        WHERE cit_id = :id';
+        $stmt = Config::getInstance()->getPDO()->prepare($sql);
+        $stmt->bindValue(':id', $id, \PDO::PARAM_INT);
+        if ($stmt->execute() === false) {
+            throw new InvalidSqlQueryException($sql, $stmt);
+        } else {
+            $row = $stmt->fetch(\PDO::FETCH_ASSOC);
+            if (!empty($row)) {
+                $currentObject = new City(
+                    $row['cit_id'],
+                    //new Country($row['country_cou_id']),
+                    Country::get($row['country_cou_id']), $row['cit_name'], $row['cit_inserted']);
+                return $currentObject;
+            }
+        }
+        return false;
+    }
 
-	/**
-	 * @return DbObject[]
-	 */
-	public static function getAll() {
-		// TODO: Implement getAll() method.
-	}
 
 	/**
 	 * @return array

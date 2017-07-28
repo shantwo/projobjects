@@ -1,3 +1,11 @@
 vendor
 inc/config.php
 nbproject
+.idea/dataSources.local.xml
+.idea/vcs.xml
+.idea/projobjects.iml
+.idea/modules.xml
+.idea/dataSources/7adfe1af-22a3-48c1-881c-ffabfe146294.xml
+.idea/dataSources.xml
+.idea/workspace.xml
+.idea/deployment.xml
